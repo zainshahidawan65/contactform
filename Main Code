@@ -1,0 +1,43 @@
+<?php
+if(isset($_POST['submit'])) {
+    // Collect the form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    // Set the recipient email address
+    $to = "your_email@example.com";
+
+    // Set the email subject
+    $subject = "New contact form submission";
+
+    // Build the email content
+    $email_content = "Name: $name\n";
+    $email_content .= "Email: $email\n\n";
+    $email_content .= "Message:\n$message\n";
+
+    // Set the email headers
+    $headers = "From: $name <$email>";
+
+    // Send the email
+    mail($to, $subject, $email_content, $headers);
+
+    // Redirect to the thank you page
+    header("Location: thankyou.html");
+    exit;
+}
+?>
+
+<!-- HTML form -->
+<form method="post" action="">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit" name="submit">Send</button>
+</form>
